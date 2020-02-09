@@ -1,0 +1,6 @@
+#!/bin/sh
+# Shred trash
+
+find ~/.local/share/Trash/ -type f -exec shred -fzu {} +
+
+rm -r ~/.local/share/Trash/* ~/.local/share/Trash/.*
