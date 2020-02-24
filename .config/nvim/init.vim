@@ -16,7 +16,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'psf/black'
 Plug 'dense-analysis/ale'
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'juliaeditorsupport/julia-vim'
 call plug#end()
 
 
@@ -82,11 +82,6 @@ call plug#end()
 
 
 """LATEX
-	" Set vim-latex-live-preview
-	let g:livepreview_previewer = 'zathura'
-	autocmd Filetype tex setl updatetime=333
-	autocmd FileType tex nnoremap <leader>p :LLPStartPreview<CR>
-
 	" Runs a script that cleans out tex build files whenever .tex file is closed
 	autocmd VimLeave *.tex !texclear %
 
