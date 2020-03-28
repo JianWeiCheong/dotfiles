@@ -15,8 +15,6 @@ Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'psf/black'
-Plug 'dense-analysis/ale'
-Plug 'juliaeditorsupport/julia-vim'
 call plug#end()
 
 
