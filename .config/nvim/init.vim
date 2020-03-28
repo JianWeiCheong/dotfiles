@@ -14,7 +14,7 @@ Plug 'jreybert/vimagit'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
-Plug 'psf/black'
+Plug 'psf/black', { 'tag': '19.10b0' }
 call plug#end()
 
 
@@ -64,7 +64,6 @@ call plug#end()
 
 
 " Set Python
-	let g:python3_host_prog = '~/Programs/miniconda3/bin/python'
 	autocmd FileType python nnoremap <leader>y :Black<CR>
 
 " Nerd tree
