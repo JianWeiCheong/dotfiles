@@ -9,12 +9,12 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
-Plug 'mboughaba/i3config.vim'
 Plug 'jreybert/vimagit'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'psf/black', { 'tag': '19.10b0' }
+Plug 'ap/vim-css-color'
 call plug#end()
 
 
