@@ -1,0 +1,146 @@
+# Main commands
+## Terminal
+super + Return
+	termite
+## Rofi menu
+super + d
+	rofi -show run
+## Ranger
+super + r
+	termite -e ranger
+## Close/Kill programs
+super + {_,shift + }q
+	bspc node -{c,k}
+## Lock screen
+super + shift + x
+	blurlock
+
+# Program commands
+## ncmpcpp/alsamixer
+super + {_,shift + }m
+	{termite -e ncmpcpp, termite -e alsamixer}
+## Red circle at cursor
+super + c
+	togglecursor
+## Screenshot selection
+Print
+	maimpick
+## Record/fullscreen screenshot
+super + {_,shift+ }Print
+	{dmenurecord,maimfull}
+## Show keybind help
+super + slash
+	sxhkd-help
+## Scratchpad ipython
+super + i
+	scratchpad ipydropdown
+
+# System commands
+## Quit/restart bpswm
+super + control + {q,r}
+	bspc {quit,wm -r}
+## Restart sxhkd
+super + Escape
+	pkill -USR1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'
+XF86AudioMute
+	amixer -q set Master toggle
+XF86AudioLowerVolume
+	amixer -D pulse set Master 3%- unmute
+XF86AudioRaiseVolume
+	amixer -D pulse set Master 3%+ unmute
+XF86MonBrightnessUp
+	expr $(cat /sys/class/backlight/intel_backlight/brightness) + 50 > /sys/class/backlight/intel_backlight/brightness
+XF86MonBrightnessDown
+	expr $(cat /sys/class/backlight/intel_backlight/brightness) - 50 > /sys/class/backlight/intel_backlight/brightness
+
+# XF86MonBrightnessUp
+# 	xbacklight -inc 5
+# XF86MonBrightnessDown
+# 	xbacklight -dec 5
+
+# Windows commands
+## focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+## focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+## focus the next/previous window in the current desktop
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+
+## focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+## focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+## focus the older or newer node in the focus history
+# super + {o,i}
+# 	bspc wm -h off; \
+# 	bspc node {older,newer} -f; \
+# 	bspc wm -h on
+
+## focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+## Mouse click change desktop
+~button2
+  	bspc desktop -f '1' && bspc desktop -f '6'
+
+## Expand/contract a window by moving one of its side outward/inward
+super + shift + s : {h,j,k,l}
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+
+## move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# EXTRA
+## alternate between the tiled and monocle layout
+super + Tab
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+# super + y
+# 	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+# super + g
+# 	bspc node -s biggest.window
+
+# State/flags
+## set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+## set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+# Preselect
+## preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+## preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+## cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+## cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+
+
