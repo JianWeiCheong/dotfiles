@@ -1,0 +1,6 @@
+#!/bin/sh
+
+sudo killall -KILL NetworkManager
+sudo killall -KILL wpa_supplicant
+
+shutdown now

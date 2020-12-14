@@ -1,0 +1,3 @@
+#!/bin/sh
+
+[ -z $(pidof find-cursor) ] && find-cursor -r0 -f -d1 -w1 -l16 -s16 -cred || pkill find-cursor

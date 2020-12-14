@@ -1,0 +1,21 @@
+#!/bin/sh
+# Convert video file to WhatsApp compatible format.
+# Uses ffmpeg.
+# Source: https://stackoverflow.com/a/45882902
+
+# -profile:v baseline -level 3.0 makes the file
+# more compatible with most older players.
+
+# -pix_fmt yuv420p required to compile to baseline
+# (YUV planar color space with 4:2:0 chroma subsampling).
+
+if [[ $# -eq 0 ]] ; then
+	echo "No files given."
+	echo "Script usage: 'whatsappconvert <filename>'."
+	exit 1
+else
+	for i do
+		filename=$(echo "$i" | cut -f 1 -d '.')
+		ffmpeg -i "$i" -c:v libx264 -c:s mov_text -profile:v baseline -level 3.0 -pix_fmt yuv420p "${filename}_working.mp4"
+	done
+fi
