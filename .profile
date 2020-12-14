@@ -3,10 +3,8 @@
 
 # Adds `~/.local/bin/` and all subdirectories to $PATH
 export PATH="$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':')$PATH"
-# Adds `~/.local/TinyTeX/bin/` and all subdirectories to $PATH
-export PATH="$(du "$HOME/.local/TinyTeX/bin/" | cut -f2 | tr '\n' ':')$PATH"
 export EDITOR="nvim"
-export TERMINAL="st"
+export TERMINAL="termite"
 export BROWSER="firefox"
 export READER="zathura"
 export FILE="ranger"
@@ -15,4 +13,8 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
+export GTK_IM_MODULE=xim
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=xim
 
+ibus-daemon -drx
