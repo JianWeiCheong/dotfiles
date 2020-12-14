@@ -32,12 +32,14 @@ echo "alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" 
 
 ### Programs
 
-+ nvim
-+ zathura
++ bspwm
 + mpv
-+ i3
-+ dmenu
++ nvim
++ polybar
 + ranger
++ sxhkd
++ termite
++ zathura
 
 ### .local/bin
 
