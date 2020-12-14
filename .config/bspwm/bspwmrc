@@ -6,7 +6,25 @@ else
 	pgrep -x sxhkd > /dev/null || sxhkd &
 fi
 
-bspc monitor -d 1 2 3 4 5 6 7 8
+# run the xrandr command if an external monitor is connected to the
+# laptop.  This must be executed before the polybar command, so that
+# polybar can set the two separate bars properly.
+external_monitor=$(xrandr --query | grep 'HDMI1 connected')
+external_monitor2=$(xrandr --query | grep 'HDMI-1-1 connected')
+
+if [[ $external_monitor ]]; then
+	xrandr --output eDP1 --primary --mode 1920x1080 --rotate normal --output HDMI1 --mode 1920x1080 --rotate normal --right-of eDP1
+
+	bspc monitor eDP1 -d 1 2 3 4 5
+	bspc monitor HDMI1 -d 6 7 8 9 10
+elif [[ $external_monitor2 ]]; then
+	xrandr --output eDP-1-1 --primary --mode 1920x1080 --rotate normal --output HDMI-1-1 --mode 1920x1080 --rotate normal --right-of eDP-1-1
+
+	bspc monitor eDP-1-1 -d 1 2 3 4 5
+	bspc monitor HDMI-1-1 -d 6 7 8 9 10
+else
+	bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+fi
 
 bspc config focus_follows_pointer true
 bspc config border_width         2
@@ -17,11 +35,27 @@ bspc config split_ratio          0.50
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
+# Program rules
 bspc rule -a firefox:*:Picture-in-Picture sticky=on state=floating
-bspc rule -a Thunderbird desktop=^8
+bspc rule -a Thunderbird desktop=^10
 bspc rule -a *:*:alsamixer sticky=on state=floating
 bspc rule -a ipydropdown sticky=on state=floating hidden=on
 bspc rule -a Zathura state=tiled
+
+# Extra rules
+bspc rule -a confirm state=floating
+bspc rule -a dialog state=floating
+bspc rule -a download state=floating
+bspc rule -a error state=floating
+bspc rule -a file_progress state=floating
+bspc rule -a notification state=floating
+bspc rule -a splash state=floating
+bspc rule -a toolbar state=floating
+bspc rule -a *:*:pinentry state=floating  # GPG key password
+bspc rule -a ssh-askpass state=floating  # ssh-askpass
+bspc rule -a *:pamac-manager:* state=floating
+bspc rule -a *:matplotlib:* state=floating
+
 
 # Desktop
 xrb -load ~/.Xresources
@@ -29,7 +63,7 @@ xrb -load ~/.Xresources
 nitrogen --restore &
 
 # Autostarts
-pgrep picom > /dev/null || picom -b &
+pgrep picom > /dev/null || picom -b --experimental-backend &
 pgrep thunderbird > /dev/null || thunderbird &
 pgrep pcloud > /dev/null || pcloud &
 pgrep ipystart > /dev/null || termite --class ipydropdown -e 'ipystart -i' &
