@@ -21,6 +21,6 @@ elif [[ $external_monitor2 ]]; then
 	polybar main2 -c $(dirname $0)/config.ini &
 	polybar main_external2 -c $(dirname $0)/config.ini &
 else
-	polybar main2 -c $(dirname $0)/config.ini &
+	polybar main -c $(dirname $0)/config.ini &
 fi
 
