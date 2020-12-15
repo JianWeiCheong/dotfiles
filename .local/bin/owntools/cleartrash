@@ -3,4 +3,4 @@
 
 find ~/.local/share/Trash/ -type f -exec shred -fzuv {} +
 
-rm -r ~/.local/share/Trash/* ~/.local/share/Trash/.*
+rm -rf ~/.local/share/Trash/* ~/.local/share/Trash/.*
