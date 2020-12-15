@@ -144,3 +144,19 @@ alias config='/usr/bin/git --git-dir=/home/jianwei/.dotfiles/ --work-tree=/home/
 # Python virtual env wrapper
 export WORKON_HOME=$HOME/.local/virtualenvs
 source /usr/bin/virtualenvwrapper_lazy.sh
+
+# Cleanup
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
+export TEXMFHOME=$XDG_DATA_HOME/texmf
+export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
+export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
+export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
+export LESSKEY="$XDG_CONFIG_HOME"/less/lesskey
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
