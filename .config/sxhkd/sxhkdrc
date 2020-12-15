@@ -91,7 +91,7 @@ super + {_,shift + }{1-9,0}
 
 ## Mouse click change desktop
 ~button2
-  	bspc desktop -f '1' && bspc desktop -f '6'
+  	bspc desktop -f '6' && bspc desktop -f '1'
 
 ## Expand/contract a window by moving one of its side outward/inward
 super + shift + s : {h,j,k,l}
