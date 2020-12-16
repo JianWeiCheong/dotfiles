@@ -26,7 +26,7 @@ textype() { \
 mdtype() { \
 	engine="xelatex"
 	( sed 5q "$file" | grep -i -q 'groff' ) && engine="pdfroff"
-	pandoc "$file" --pdf-engine=$engine -o "$base".pdf
+	pandoc "$file" --pdf-engine=$engine -o "$base".pdf -N
 	}
 
 case "$file" in
