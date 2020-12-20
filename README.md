@@ -32,6 +32,7 @@ echo "alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" 
 
 ### Programs
 
++ zsh
 + bspwm
 + mpv
 + nvim
@@ -47,4 +48,5 @@ echo "alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" 
 
 ### Extras
 
-+ .profile
++ .profile, .xprofile, .zprofile
++ .xinitrc
