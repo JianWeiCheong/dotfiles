@@ -30,6 +30,7 @@ bspc config focus_follows_pointer true
 bspc config border_width         2
 bspc config window_gap          10
 bspc config focused_border_color "#00BCD4"
+bspc config presel_feedback_color "#177F8C"
 
 bspc config split_ratio          0.50
 bspc config borderless_monocle   true
