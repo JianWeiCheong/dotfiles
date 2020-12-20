@@ -20,7 +20,6 @@ export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 
 # Python virtual env wrapper
 export WORKON_HOME=$HOME/.local/virtualenvs
-source /usr/bin/virtualenvwrapper_lazy.sh
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME/.config"

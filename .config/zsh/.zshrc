@@ -76,5 +76,8 @@ bindkey '^e' edit-command-line
 # Git bare repo
 alias config='/usr/bin/git --git-dir=/home/jianwei/.dotfiles/ --work-tree=/home/jianwei'
 
+# Virtualenv wrapper
+source /usr/bin/virtualenvwrapper_lazy.sh
+
 # Load syntax highlighting; should be last.
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
