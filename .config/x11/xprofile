@@ -3,15 +3,20 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
-#mpd &			# music player daemon-you might prefer it as a service though
-#remaps &		# run the remaps script, switching caps/esc and more; check it for more info
-setbg &			# set the background with the `setbg` script
 #xrdb ${XDG_CONFIG_HOME:-$HOME/.config}/x11/xresources &	# Uncomment to use Xresources colors/settings on startup
-#xcompmgr &		# xcompmgr for transparency
+
+# Set dual monitors
+monitors=( $(xrandr -q | grep " connected" | awk '{print $1}') )
+
+if [ "${#monitors[@]}" = 2 ]; then
+	xrandr --output ${monitors[0]} --primary --mode 1920x1080 --rotate normal --output ${monitors[1]} --mode 1920x1080 --rotate normal --right-of ${monitors[0]}
+fi
+
 dunst &			# dunst for notifications
 xset r rate 300 50 &	# Speed xrate up
-#unclutter &		# Remove mouse when idle
 ibus-daemon -drx	# Start ibus for anthy
+setbg &			# set the background with the `setbg` script
+unclutter &		# Remove mouse when idle
 
 # This line autostarts an instance of Pulseaudio that does not exit on idle.
 # This is "necessary" on Artix due to a current bug between PA and

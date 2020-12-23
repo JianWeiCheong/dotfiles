@@ -14,13 +14,19 @@ fi
 # Launch 2 polybar for 2 monitors
 external_monitor=$(xrandr --query | grep 'HDMI1 connected')
 external_monitor2=$(xrandr --query | grep 'HDMI-1-1 connected')
-if [[ $external_monitor ]]; then
-	polybar main -c $(dirname $0)/config.ini &
-	polybar main_external -c $(dirname $0)/config.ini &
-elif [[ $external_monitor2 ]]; then
-	polybar main2 -c $(dirname $0)/config.ini &
-	polybar main_external2 -c $(dirname $0)/config.ini &
+
+if [[ $(xrandr | grep "eDP1") ]]; then
+	module="main"
+	module_external="main_external"
 else
-	polybar main -c $(dirname $0)/config.ini &
+	module="main2"
+	module_external="main_external2"
+fi
+
+if [[ $external_monitor || $external_monitor2 ]]; then
+	polybar $module -c $(dirname $0)/config.ini &
+	polybar $module_external -c $(dirname $0)/config.ini &
+else
+	polybar $module -c $(dirname $0)/config.ini &
 fi
 

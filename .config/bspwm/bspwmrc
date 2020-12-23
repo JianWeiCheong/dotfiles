@@ -6,15 +6,11 @@ else
 	pgrep -x sxhkd > /dev/null || sxhkd &
 fi
 
-external_monitor=$(xrandr --query | grep 'HDMI1 connected')
-external_monitor2=$(xrandr --query | grep 'HDMI-1-1 connected')
+monitors=( $(xrandr -q | grep ' connected' | awk '{print $1}') )
 
-if [[ $external_monitor ]]; then
-	bspc monitor eDP1 -d 1 2 3 4 5
-	bspc monitor HDMI1 -d 6 7 8 9 10
-elif [[ $external_monitor2 ]]; then
-	bspc monitor eDP-1-1 -d 1 2 3 4 5
-	bspc monitor HDMI-1-1 -d 6 7 8 9 10
+if [ "${#monitors[@]}" = 2 ]; then
+	bspc monitor "${monitors[0]}" -d 1 2 3 4 5
+	bspc monitor "${monitors[1]}" -d 6 7 8 9 10
 else
 	bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 fi
@@ -49,8 +45,6 @@ bspc rule -a *:*:pinentry state=floating  # GPG key password
 bspc rule -a ssh-askpass state=floating  # ssh-askpass
 bspc rule -a *:pamac-manager:* state=floating
 bspc rule -a *:matplotlib:* state=floating
-bspc rule -a mpvfloat state=floating sticky=on
-
 
 # Desktop
 xrb -load ~/.Xresources
