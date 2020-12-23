@@ -6,20 +6,13 @@ else
 	pgrep -x sxhkd > /dev/null || sxhkd &
 fi
 
-# run the xrandr command if an external monitor is connected to the
-# laptop.  This must be executed before the polybar command, so that
-# polybar can set the two separate bars properly.
 external_monitor=$(xrandr --query | grep 'HDMI1 connected')
 external_monitor2=$(xrandr --query | grep 'HDMI-1-1 connected')
 
 if [[ $external_monitor ]]; then
-	xrandr --output eDP1 --primary --mode 1920x1080 --rotate normal --output HDMI1 --mode 1920x1080 --rotate normal --right-of eDP1
-
 	bspc monitor eDP1 -d 1 2 3 4 5
 	bspc monitor HDMI1 -d 6 7 8 9 10
 elif [[ $external_monitor2 ]]; then
-	xrandr --output eDP-1-1 --primary --mode 1920x1080 --rotate normal --output HDMI-1-1 --mode 1920x1080 --rotate normal --right-of eDP-1-1
-
 	bspc monitor eDP-1-1 -d 1 2 3 4 5
 	bspc monitor HDMI-1-1 -d 6 7 8 9 10
 else
@@ -56,12 +49,12 @@ bspc rule -a *:*:pinentry state=floating  # GPG key password
 bspc rule -a ssh-askpass state=floating  # ssh-askpass
 bspc rule -a *:pamac-manager:* state=floating
 bspc rule -a *:matplotlib:* state=floating
+bspc rule -a mpvfloat state=floating sticky=on
 
 
 # Desktop
 xrb -load ~/.Xresources
 ~/.config/polybar/nord/launch.sh
-nitrogen --restore &
 
 # Autostarts
 pgrep picom > /dev/null || picom -b --experimental-backend &
