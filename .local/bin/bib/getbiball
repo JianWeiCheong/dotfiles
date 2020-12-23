@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Enable globstar
+shopt -s globstar
+
+for pdf in **/*.pdf; do
+	echo $pdf
+	echo $pdf >> out.bib
+	getbib "$pdf" >> out.bib
+	printf "\n" >> out.bib
+done
+

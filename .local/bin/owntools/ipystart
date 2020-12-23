@@ -1,6 +1,0 @@
-#!/usr/bin/sh
-
-source ~/.local/virtualenvs/base/bin/activate
-
-ipython
-
