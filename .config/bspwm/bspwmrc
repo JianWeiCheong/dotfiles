@@ -51,8 +51,13 @@ xrb -load ~/.Xresources
 ~/.config/polybar/nord/launch.sh
 
 # Autostarts
-pgrep picom > /dev/null || picom -b --experimental-backend &
+if tty=$(tty 2> /dev/null); then
+	pgrep -t "${tty#/dev/}" -x picom > /dev/null || picom &
+	pgrep -t "${tty#/dev/}" -x ipystart > /dev/null || termite --class ipydropdown -e 'ipystart -i' &
+else
+	pgrep -x picom > /dev/null || picom &
+	pgrep -x ipystart > /dev/null || termite --class ipydropdown -e 'ipystart -i' &
+fi
 pgrep thunderbird > /dev/null || thunderbird &
 pgrep pcloud > /dev/null || pcloud &
-pgrep ipystart > /dev/null || termite --class ipydropdown -e 'ipystart -i' &
 
