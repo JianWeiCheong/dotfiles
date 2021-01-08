@@ -13,7 +13,7 @@ super + {_,shift + }q
 	bspc node -{c,k}
 ## Lock screen
 super + shift + x
-	blurlock
+	i3lock -f -c 000000
 
 # Program commands
 ## ncmpcpp/alsamixer
