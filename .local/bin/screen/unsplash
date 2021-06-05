@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+# Sets a random background from unsplash. Can accept search terms.
+link="https://source.unsplash.com/featured/1920x1080/"
+file=~/.config/wall1.png
+
+while getopts "hes" OPTION; do
+        case $OPTION in
+                s)
+			for last; do true; done
+			link="${link}?$last"
+			;;
+		e)
+			file=~/.config/wall2.png
+			;;
+                h)
+                        echo "Usage:"
+                        echo "$0 -h "
+                        echo "$0 -e "
+			echo "$0 -s nature,ocean"
+                        echo "$0 -e -s cats"
+                        echo ""
+                        echo "   -e     to set for external HDMI"
+                        echo "   -s     to enter search terms"
+                        echo "   -h     help (this output)"
+                        exit 0
+                        ;;
+        esac
+done
+
+wget -q -O wall $link &&
+	mv wall $file
+
+setbg
